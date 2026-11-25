@@ -1,56 +1,54 @@
 # importar as classes e construir a aplicação aqui
-from dataclasses import dataclass
-
-from core.process.process_input import ProcessInput
 from core.process.process_input_list import ProcessInputList
 from core.process.ready_process import ReadyProcess
 from core.engine.scheduling_algorithm import SchedulingAlgorithm
+from core.engine.engine import Engine
+from core.engine.algorithms.fcfs import FCFS
+from core.engine.algorithms.sjf import SJF
+from core.engine.algorithms.rr import RoundRobin
+from core.engine.algorithms.priority import Priority
+from core.engine.algorithms.edf import EDF
+from core.engine.algorithms.cfs import CFS
+from core.engine.algorithms.autoral import Autoral
+from core.gantt.execution_logger import ExecutionLogger
+from core.gantt.gantt_chart_generator import GanttChartGenerator
+from core.inbound_ports import SimulationConfig, SimulationResult
+from core.metrics.global_metrics_calculator import GlobalMetricsCalculator
 
-# Esse é um esboço de como dividir as responsabilidades entre os objetos que fazem parte do núcleo da aplicação
+ALGORITHMS = {
+    'FCFS': FCFS, 'FIFO': FCFS, 'SJF': SJF, 'RR': RoundRobin,
+    'PRIORITY': Priority, 'EDF': EDF, 'CFS': CFS, 'AUTORAL': Autoral,
+}
+ALL_ALGORITHMS = ['FCFS', 'SJF', 'RR', 'PRIORITY', 'EDF', 'CFS', 'AUTORAL']
 
-# As entradas
-p_list = ProcessInputList([
-    ProcessInput(id=1, arrival_time=0, burst_time=10, priority=3),
-    ProcessInput(id=2, arrival_time=1, burst_time=6, priority=5),
-    ProcessInput(id=3, arrival_time=2, burst_time=2, priority=2),
-    ProcessInput(id=4, arrival_time=3, burst_time=4, priority=1),
-    ProcessInput(id=5, arrival_time=4, burst_time=8, priority=4),
-])
-
-def execute_round(ready_queue: list[ReadyProcess], next: ReadyProcess, time: int):
-    next.execute(time)
-    for rp in ready_queue:
-        if (rp == next): continue
-        if (rp.completion_time is not None): continue
-        if (time < rp.arrival_time): continue
-        rp.wait()
 
 def app(p_list: ProcessInputList, alg: SchedulingAlgorithm) -> list[ReadyProcess]:
-    # Engine.run(...)
-    time = 0
-    quantum = 0
+    """Roda a simulação e devolve a ready_queue com todos os processos já concluídos."""
+    engine = Engine(alg, p_list)
+    engine.run()
+    return engine.executor.ready_queue
 
-    # onde entra o logger?
-    # o scheduling algorithm decide o quantum e o proximo a ser executado
-    # FCFS
-    ready_queue = [ReadyProcess(p) for p in p_list.get_arrived(time)]
 
-    # O SchedulingAlgorithm vai retornar quem é o next a ser Executado pelo ProcessExecutor
-    # a engine é dona da ready_queue
-    # o fcfs --|> SchedulingAlgorithm é dono da estrutura que organiza e calcula qual é o próximo processo e o quantum que ele deve receber
-    # engine.run(...)
-    #
-    next = None
+class Simulator:
+    """Implementa a porta de entrada (SimulationUseCase)."""
 
-    # roda tudo
-    for rp in ready_queue:
-        next, quantum = alg.next(next, ready_queue) # obtem o proximo a ser executado e o quantum do SchedulingAlgorithm
-        for _ in range(quantum):
-            # process_executor.execute(...)
-            execute_round(ready_queue, next, time) # executa o processo da vez por uma unidade de tempo
+    def run(self, algorithm: str, config: SimulationConfig,
+            processes: ProcessInputList) -> SimulationResult:
+        name = algorithm.upper()
+        if name not in ALGORITHMS:
+            raise ValueError(f'Algoritmo desconhecido: {algorithm}. Use: {", ".join(ALGORITHMS)} ou ALL')
+        alg = ALGORITHMS[name](quantum=config.quantum, overload=config.overhead, seed=config.seed)
 
-            # engine.update()
-            time += 1 # acumula essa unidade de tempo
-            ready_queue.extend([ReadyProcess(p) for p in p_list.get_arrived(time)]) # busca mais processos dentro da lista
+        process_inputs = processes._list.copy()
+        deadlines = {p.id: (None if p.deadline is None else p.deadline + p.arrival_time)
+                     for p in process_inputs}  # ordem de chegada
+        engine = Engine(alg, processes)
+        logger = ExecutionLogger()
+        table = engine.run(logger)
 
-    return ready_queue
+        metrics = GlobalMetricsCalculator().calculate(
+            table, idle_time=engine.idle_time, total_preemptions=engine.preemptions,
+            overhead_time=engine.overhead_time)
+        gantt = GanttChartGenerator().generate(
+            logger.get_timestamps(), deadlines, title=name, processes=process_inputs)
+        return SimulationResult(name, table, metrics, logger.get_timestamps(), gantt)

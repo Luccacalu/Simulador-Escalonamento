@@ -1,0 +1,11 @@
+{
+  "quantum": 2,
+  "sobrecarga_contexto": 1,
+  "seed": 42,
+  "processos": [
+    {"id": "P1", "chegada": 0,  "execucao": 3, "deadline": 6,  "prioridade": 2},
+    {"id": "P2", "chegada": 10, "execucao": 4, "deadline": 16, "prioridade": 1},
+    {"id": "P3", "chegada": 11, "execucao": 2, "deadline": 20, "prioridade": 3},
+    {"id": "P4", "chegada": 25, "execucao": 3, "deadline": 30, "prioridade": 1}
+  ]
+}
