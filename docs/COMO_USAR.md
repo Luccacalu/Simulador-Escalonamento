@@ -383,7 +383,7 @@ Regras atuais:
 - `chegada` deve ser um inteiro;
 - `execucao` deve ser um inteiro maior que zero;
 - `deadline`, quando informado, deve ser um inteiro;
-- em JSON com deadline relativo, o deadline relativo deve ser maior que zero;
+- em JSON com deadline relativo, o deadline relativo deve ser maior ou igual a zero;
 - `prioridade`, quando informada, deve ser um inteiro;
 - booleanos não são aceitos como valores numéricos.
 

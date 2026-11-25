@@ -8,6 +8,7 @@ class DeadlineReadyProcess(ReadyProcess):
 
     def __init__(self, process_input: ProcessInput):
         super().__init__(process_input)
-        if process_input.deadline is None: raise Exception('You must be specify the deadline on ProcessInput!')
+        if process_input.deadline is None:
+            raise ValueError('EDF exige deadline em todos os processos')
 
         self.new_deadline = process_input.deadline + process_input.arrival_time

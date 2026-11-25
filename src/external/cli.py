@@ -80,13 +80,21 @@ def main(argv: list[str] | None = None) -> int:
     algs = ALL_ALGORITHMS if args.alg.upper() == 'ALL' else [args.alg.upper()]
     results = []
     for name in algs:
-        config, processes = JsonReader().read(args.input)  # lê de novo: a lista é consumida
-        if args.quantum is not None:
-            config.quantum = args.quantum
-        if args.overhead is not None:
-            config.overhead = args.overhead
-        if args.seed is not None:
-            config.seed = args.seed
+        try:
+            config, processes = JsonReader().read(args.input)  # lê de novo: a lista é consumida
+            if args.quantum is not None:
+                if args.quantum <= 0:
+                    raise ValueError('quantum deve ser > 0')
+                config.quantum = args.quantum
+            if args.overhead is not None:
+                if args.overhead < 0:
+                    raise ValueError('sobrecarga_contexto deve ser >= 0')
+                config.overhead = args.overhead
+            if args.seed is not None:
+                config.seed = args.seed
+        except (OSError, ValueError, KeyError, TypeError) as e:
+            print(f'Erro ({name}): {e}', file=sys.stderr)
+            return 1
         try:
             r = simulator.run(name, config, processes)
         except ValueError as e:

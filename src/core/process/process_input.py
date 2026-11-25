@@ -16,7 +16,9 @@ class ProcessInput:
             v = getattr(self, name)
             if v is not None and (not isinstance(v, int) or isinstance(v, bool)):
                 raise ValueError(f'{name} do processo {self.id} deve ser inteiro')
+        if self.arrival_time < 0:
+            raise ValueError(f'arrival_time do processo {self.id} deve ser >= 0')
         if self.burst_time <= 0:
             raise ValueError(f'burst_time do processo {self.id} deve ser > 0')
-        if self.deadline is not None and self.deadline <= 0:
-            raise ValueError(f'deadline do processo {self.id} deve ser > 0 (relativo à chegada)')
+        if self.deadline is not None and self.deadline < 0:
+            raise ValueError(f'deadline do processo {self.id} deve ser >= 0 (relativo à chegada)')
