@@ -23,9 +23,7 @@ def drawing(timeline):
     """Linha do tempo em texto: letra = executando, s = sobrecarga, . = ociosa."""
     return "".join(s.pid if s.kind == "exec" else ("s" if s.kind == "overhead" else ".") for s in timeline)
 
-
-# ---------- resolução do professor (A=0/8, B=4/4, C=8/2, D=12/7; quantum 2; sobrecarga 1) ----------
-# Obs.: o "tempo médio de resposta" do professor é o turnaround médio (término - chegada).
+# o "tempo médio de resposta" é o turnaround médio (término - chegada).
 
 def test_professor_fifo():
     _, table, g = run("caso_professor.json", "FCFS")
@@ -56,7 +54,7 @@ def test_professor_rr_igual_a_grade_da_folha():
     assert g.average_turnaround_time == 13.75
 
 
-# ---------- teste original do colega (FCFS, 5 processos, sem sobrecarga) ----------
+# ---------- teste (FCFS, 5 processos, sem sobrecarga) ----------
 
 def test_fcfs_cinco_processos():
     _, table, _ = run("caso_fcfs_5.json", "FCFS")
