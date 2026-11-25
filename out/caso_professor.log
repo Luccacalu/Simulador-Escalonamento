@@ -1,0 +1,45 @@
+Algoritmo: RR
+
+t=0: executando A
+t=1: executando A
+t=2: troca de contexto (saindo A)
+t=3: executando A
+t=4: executando A
+t=5: troca de contexto (saindo A)
+t=6: executando B
+t=7: executando B
+t=8: troca de contexto (saindo B)
+t=9: executando A
+t=10: executando A
+t=11: troca de contexto (saindo A)
+t=12: executando C
+t=13: executando C
+t=14: executando B
+t=15: executando B
+t=16: executando D
+t=17: executando D
+t=18: troca de contexto (saindo D)
+t=19: executando A
+t=20: executando A
+t=21: executando D
+t=22: executando D
+t=23: troca de contexto (saindo D)
+t=24: executando D
+t=25: executando D
+t=26: troca de contexto (saindo D)
+t=27: executando D
+
+proc  chegada  exec  deadline  prio  inicio  termino  espera  turnaround  deadline_ok?
+   A        0     8        35     3       0       21      13          21           sim
+   B        4     4        19     1       6       16       8          12           sim
+   C        8     2        28     2      12       14       4           6           sim
+   D       12     7        37     4      16       28       9          16           sim
+
+Turnaround médio : 13.75
+Espera média     : 8.50
+Resposta média   : 2.50  (início - chegada)
+Deadlines perdidos: 0
+Throughput       : 0.1429 processos/u.t.
+Tempo total      : 28 u.t.
+CPU ociosa       : 25.0%  (ociosa=0 + sobrecarga=7)
+Trocas de contexto: 7
