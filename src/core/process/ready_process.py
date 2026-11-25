@@ -2,7 +2,7 @@ from core.process.process_input import ProcessInput
 
 
 class ReadyProcess:
-    id: int
+    id: int | str
     arrival_time: int
     burst_time: int
     remaining_time: int
@@ -10,6 +10,8 @@ class ReadyProcess:
     response_time: int | None = None
     completion_time: int | None = None
     turnaround_time: int | None = None
+    priority: int | None = None   # copiados do ProcessInput para a tabela final
+    deadline: int | None = None   # deadline ABSOLUTO (chegada + deadline relativo)
 
     def __repr__(self):
         return f"""\nReadyProcess: {{
@@ -28,6 +30,9 @@ class ReadyProcess:
         self.arrival_time = process_input.arrival_time
         self.burst_time = process_input.burst_time
         self.remaining_time = process_input.burst_time
+        self.priority = process_input.priority
+        if process_input.deadline is not None:
+            self.deadline = process_input.deadline + process_input.arrival_time
 
     def wait(self):
         self.waiting_time += 1

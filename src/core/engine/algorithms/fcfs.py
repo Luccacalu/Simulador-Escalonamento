@@ -2,8 +2,8 @@ from core.process.ready_process import ReadyProcess
 from core.engine.scheduling_algorithm import SchedulingAlgorithm
 
 class FCFS(SchedulingAlgorithm):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, quantum: int | None = None, overload: int | None = None, seed: int | None = None) -> None:
+        super().__init__(quantum, overload, seed)
 
     def next(self, on_cpu: None | ReadyProcess | tuple[ReadyProcess, ReadyProcess], ready_queue: list[ReadyProcess]) -> tuple[ReadyProcess, int]:
         next: ReadyProcess | None = None

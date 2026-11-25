@@ -14,8 +14,6 @@ from app import app
 
 from metrics import Metrics, check_metrics
 
-# Esse é um esboço de como dividir as responsabilidades entre os objetos que fazem parte do núcleo da aplicação
-
 # As entradas
 p_list = ProcessInputList([
     ProcessInput(id=1, arrival_time=0, burst_time=10, priority=3),

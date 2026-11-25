@@ -7,5 +7,6 @@ class PriorityReadyProcess(ReadyProcess):
 
     def __init__(self, process_input: ProcessInput):
         super().__init__(process_input)
-        if process_input.priority is None: raise Exception('You must be specify the priority on ProcessInput!')
+        if process_input.priority is None:
+            raise ValueError('PRIORITY exige prioridade em todos os processos')
         self.priority = process_input.priority
