@@ -1,0 +1,46 @@
+Tempo 0: CPU com Processo P1
+Tempo 1: CPU com Processo P1
+Tempo 2: CPU com Processo ('P1', 'P1')  (sobrecarga de contexto)
+Tempo 3: CPU com Processo P1
+Tempo 4: CPU ociosa
+Tempo 5: CPU ociosa
+Tempo 6: CPU ociosa
+Tempo 7: CPU ociosa
+Tempo 8: CPU ociosa
+Tempo 9: CPU ociosa
+Tempo 10: CPU com Processo P2
+Tempo 11: CPU com Processo P2
+Tempo 12: CPU com Processo ('P2', 'P3')  (sobrecarga de contexto)
+Tempo 13: CPU com Processo P3
+Tempo 14: CPU com Processo P3
+Tempo 15: CPU com Processo P2
+Tempo 16: CPU com Processo P2
+Tempo 17: CPU ociosa
+Tempo 18: CPU ociosa
+Tempo 19: CPU ociosa
+Tempo 20: CPU ociosa
+Tempo 21: CPU ociosa
+Tempo 22: CPU ociosa
+Tempo 23: CPU ociosa
+Tempo 24: CPU ociosa
+Tempo 25: CPU com Processo P4
+Tempo 26: CPU com Processo P4
+Tempo 27: CPU com Processo ('P4', 'P4')  (sobrecarga de contexto)
+Tempo 28: CPU com Processo P4
+
+=== AUTORAL ===
+id  chegada  execucao  deadline  prioridade  inicio  termino  espera  turnaround    deadline_ok?
+P1        0         3         6           2       0        4       1           4             sim
+P2       10         4        16           1      10       17       3           7  NAO (estourou)
+P3       11         2        20           3      13       15       2           4             sim
+P4       25         3        30           1      25       29       1           4             sim
+
+Turnaround médio ........ 4.75   (= "tempo médio de resposta")
+Espera média ............ 1.75
+Resposta média (inicio) . 0.50
+Deadlines estourados .... 1
+Throughput .............. 0.1379 processos/u.t.
+CPU ociosa .............. 14 u.t. (48.3%)
+Sobrecarga de contexto .. 3 u.t. (10.3%)
+Trocas de contexto ...... 3
+Tempo total ............. 29 u.t.

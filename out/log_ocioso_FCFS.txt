@@ -1,0 +1,45 @@
+Tempo 0: CPU com Processo P1
+Tempo 1: CPU com Processo P1
+Tempo 2: CPU com Processo P1
+Tempo 3: CPU ociosa
+Tempo 4: CPU ociosa
+Tempo 5: CPU ociosa
+Tempo 6: CPU ociosa
+Tempo 7: CPU ociosa
+Tempo 8: CPU ociosa
+Tempo 9: CPU ociosa
+Tempo 10: CPU com Processo P2
+Tempo 11: CPU com Processo P2
+Tempo 12: CPU com Processo P2
+Tempo 13: CPU com Processo P2
+Tempo 14: CPU com Processo P3
+Tempo 15: CPU com Processo P3
+Tempo 16: CPU ociosa
+Tempo 17: CPU ociosa
+Tempo 18: CPU ociosa
+Tempo 19: CPU ociosa
+Tempo 20: CPU ociosa
+Tempo 21: CPU ociosa
+Tempo 22: CPU ociosa
+Tempo 23: CPU ociosa
+Tempo 24: CPU ociosa
+Tempo 25: CPU com Processo P4
+Tempo 26: CPU com Processo P4
+Tempo 27: CPU com Processo P4
+
+=== FCFS ===
+id  chegada  execucao  deadline  prioridade  inicio  termino  espera  turnaround  deadline_ok?
+P1        0         3         6           2       0        3       0           3           sim
+P2       10         4        16           1      10       14       0           4           sim
+P3       11         2        20           3      14       16       3           5           sim
+P4       25         3        30           1      25       28       0           3           sim
+
+Turnaround médio ........ 3.75   (= "tempo médio de resposta")
+Espera média ............ 0.75
+Resposta média (inicio) . 0.75
+Deadlines estourados .... 0
+Throughput .............. 0.1429 processos/u.t.
+CPU ociosa .............. 16 u.t. (57.1%)
+Sobrecarga de contexto .. 0 u.t. (0.0%)
+Trocas de contexto ...... 0
+Tempo total ............. 28 u.t.
