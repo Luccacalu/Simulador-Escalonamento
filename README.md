@@ -3,6 +3,15 @@
 Simulador de eventos discretos (CPU single-core) com FCFS, SJF, Round-Robin, Prioridades,
 EDF, CFS-Sim e um algoritmo autoral. Gera Gantt (PNG), log, tabela final e resumo.
 
+## Equipe
+
+| Nome | Usuário GitHub |
+| --- | --- |
+| Lucca Giovanni Lobo Gonçalves | [Luccacalu](https://github.com/Luccacalu) |
+| Gabriel Silva Carvalho | [gbrcarvalho](https://github.com/gbrcarvalho) |
+| Davi Antoniassi | [daantoniassi](https://github.com/daantoniassi) |
+| Rafael Souza Franco | [RafaelSF-br](https://github.com/RafaelSF-br) |
+
 ## Uso
 
 ```bash
