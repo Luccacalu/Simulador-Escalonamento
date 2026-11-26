@@ -1,0 +1,45 @@
+Tempo 0: CPU com Processo A
+Tempo 1: CPU com Processo A
+Tempo 2: CPU com Processo ('A', 'A')  (sobrecarga de contexto)
+Tempo 3: CPU com Processo A
+Tempo 4: CPU com Processo A
+Tempo 5: CPU com Processo ('A', 'B')  (sobrecarga de contexto)
+Tempo 6: CPU com Processo B
+Tempo 7: CPU com Processo B
+Tempo 8: CPU com Processo ('B', 'B')  (sobrecarga de contexto)
+Tempo 9: CPU com Processo B
+Tempo 10: CPU com Processo B
+Tempo 11: CPU com Processo C
+Tempo 12: CPU com Processo C
+Tempo 13: CPU com Processo A
+Tempo 14: CPU com Processo A
+Tempo 15: CPU com Processo ('A', 'A')  (sobrecarga de contexto)
+Tempo 16: CPU com Processo A
+Tempo 17: CPU com Processo A
+Tempo 18: CPU com Processo D
+Tempo 19: CPU com Processo D
+Tempo 20: CPU com Processo ('D', 'D')  (sobrecarga de contexto)
+Tempo 21: CPU com Processo D
+Tempo 22: CPU com Processo D
+Tempo 23: CPU com Processo ('D', 'D')  (sobrecarga de contexto)
+Tempo 24: CPU com Processo D
+Tempo 25: CPU com Processo D
+Tempo 26: CPU com Processo ('D', 'D')  (sobrecarga de contexto)
+Tempo 27: CPU com Processo D
+
+=== EDF ===
+id  chegada  execucao  deadline  prioridade  inicio  termino  espera  turnaround  deadline_ok?
+ A        0         8        35           1       0       18      10          18           sim
+ B        4         4        19           2       6       11       3           7           sim
+ C        8         2        28           3      11       13       3           5           sim
+ D       12         7        37           4      18       28       9          16           sim
+
+Turnaround médio ........ 11.50   (= "tempo médio de resposta")
+Espera média ............ 6.25
+Resposta média (inicio) . 2.75
+Deadlines estourados .... 0
+Throughput .............. 0.1429 processos/u.t.
+CPU ociosa .............. 0 u.t. (0.0%)
+Sobrecarga de contexto .. 7 u.t. (25.0%)
+Trocas de contexto ...... 7
+Tempo total ............. 28 u.t.

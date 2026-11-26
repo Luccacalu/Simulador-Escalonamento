@@ -1,0 +1,30 @@
+Tempo 0: CPU com Processo P1
+Tempo 1: CPU com Processo P1
+Tempo 2: CPU com Processo ('P1', 'P2')  (sobrecarga de contexto)
+Tempo 3: CPU com Processo P2
+Tempo 4: CPU com Processo P2
+Tempo 5: CPU com Processo ('P2', 'P2')  (sobrecarga de contexto)
+Tempo 6: CPU com Processo P2
+Tempo 7: CPU com Processo P2
+Tempo 8: CPU com Processo P1
+Tempo 9: CPU com Processo P1
+Tempo 10: CPU com Processo ('P1', 'P1')  (sobrecarga de contexto)
+Tempo 11: CPU com Processo P1
+Tempo 12: CPU com Processo P3
+Tempo 13: CPU com Processo P3
+
+=== PRIORITY ===
+id  chegada  execucao  deadline  prioridade  inicio  termino  espera  turnaround    deadline_ok?
+P1        0         5         8           2       0       12       7          12  NAO (estourou)
+P2        1         4        12           1       3        8       3           7             sim
+P3        3         2        20           3      12       14       9          11             sim
+
+Turnaround médio ........ 10.00   (= "tempo médio de resposta")
+Espera média ............ 6.33
+Resposta média (inicio) . 3.67
+Deadlines estourados .... 1
+Throughput .............. 0.2143 processos/u.t.
+CPU ociosa .............. 0 u.t. (0.0%)
+Sobrecarga de contexto .. 3 u.t. (21.4%)
+Trocas de contexto ...... 3
+Tempo total ............. 14 u.t.

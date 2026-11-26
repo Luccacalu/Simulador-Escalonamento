@@ -165,6 +165,3 @@ classDiagram
     
     ResultTable o-- IndividualMetrics
 ```
-
-chat diagramas
-https://claude.ai/chat/e8f108d9-5213-40cf-9465-77a078b0474b

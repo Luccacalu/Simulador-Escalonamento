@@ -1,0 +1,27 @@
+Tempo 0: CPU com Processo P1
+Tempo 1: CPU com Processo P1
+Tempo 2: CPU com Processo P1
+Tempo 3: CPU com Processo P1
+Tempo 4: CPU com Processo P1
+Tempo 5: CPU com Processo P2
+Tempo 6: CPU com Processo P2
+Tempo 7: CPU com Processo P2
+Tempo 8: CPU com Processo P2
+Tempo 9: CPU com Processo P3
+Tempo 10: CPU com Processo P3
+
+=== FCFS ===
+id  chegada  execucao  deadline  prioridade  inicio  termino  espera  turnaround  deadline_ok?
+P1        0         5         8           2       0        5       0           5           sim
+P2        1         4        12           1       5        9       4           8           sim
+P3        3         2        20           3       9       11       6           8           sim
+
+Turnaround médio ........ 7.00   (= "tempo médio de resposta")
+Espera média ............ 3.33
+Resposta média (inicio) . 3.33
+Deadlines estourados .... 0
+Throughput .............. 0.2727 processos/u.t.
+CPU ociosa .............. 0 u.t. (0.0%)
+Sobrecarga de contexto .. 0 u.t. (0.0%)
+Trocas de contexto ...... 0
+Tempo total ............. 11 u.t.
